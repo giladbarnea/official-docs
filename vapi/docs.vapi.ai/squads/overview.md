@@ -1,0 +1,184 @@
+---
+title: Introduction to Squads (Multi-Assistant Conversations)
+subtitle: Use Squads to handle complex workflows and tasks.
+slug: squads
+---
+
+Squads let you break complex workflows into multiple specialized assistants that hand off to each other during a conversation. Each assistant in a Squad handles a specific part of your workflow; for example, one assistant for lead qualification that transfers to another for appointment booking.
+
+**Why use Squads?** Large, all-in-one assistants with lengthy prompts and extensive context lead to:
+- **Higher hallucination rates** - Models lose focus with too many and potentially conflicting instructions
+- **Increased costs** - Longer prompts consume more tokens per request
+- **Greater latency** - Processing large contexts takes more time and will increase the latency of your assistant.
+
+Squads solve this by splitting complex prompts into focused assistants with specific tools and clear goals, while maintaining full conversation context across handoffs.
+
+<Info>
+  View all configurable properties in the [API Reference](/api-reference/squads/create-squad).
+</Info>
+
+## Usage
+
+To use Squads, you can create a `squad` when starting a call and specify `members` as a list of assistants and destinations. Assistants can be either persistent or transient.
+
+<Info>
+The first member is the assistant that will start the call.
+</Info>
+
+We recommend using [Handoff Tools](/tools/handoff) to specify which destinations the current assistant can handoff too, and when to handoff to each assistant. Each assistant within the squad can use its saved handoff tools as well as handoff tools from Assistant Overrides (see below). 
+
+
+```json
+{
+    "squad": {
+        "members": [
+            {
+                "assistantId": "information-gathering-assistant-id",
+            },
+            {
+                "assistant": {
+                    "name": "Appointment Booking",
+                    "model": {
+                        "provider": "openai",
+                        "model": "gpt-4o",
+                        "toolIds": ["handoff-tool-id"],
+                        "tools": [
+                            {
+                                "type": "handoff",
+                                "destinations": [
+                                    {
+                                        "type": "assistant",
+                                        "assistantId": "assistant-123",
+                                        "description": "Call this tool when the customer wants to talk about pricing"
+                                    }
+                                ],
+                                "function": {
+                                    "name": "handoff_to_assistant_123"
+                                }
+                            }
+                        ]
+                    },
+                },
+            }
+        ]
+    }
+}
+```
+
+## Overrides
+
+### Assistant Overrides
+To override the configuration of a saved assistant without modifying the underlying assistant, use the `assistantsOverrides` to alter individual assistants. For example, if you have assistants in a squad with different voices, you can use `assistantOverrides` to make sure all of the assistants are using the same voice without changing the assistant (in case it's being used in another squad). 
+
+```json
+{
+    "squad": {
+        "members": [
+            {
+                "assistant": {
+                    "name": "Appointment Booking",
+                    "voice": {
+                        "provider": "vapi",
+                        "voiceId": "Elliot",
+                    },
+                },
+            },
+            {
+                "assistantId": "saved-assistant-id",
+                "assistantOverrides": {
+                    "voice": {
+                        "provider": "vapi",
+                        "voiceId": "Elliot",
+                    },
+                }
+            },
+        ]
+    }
+}
+```
+
+You may also define inline tools via `assistantOverrides` through the `tools:append` array, so that the assistant will only handoff if it is a part of this squad.
+```json
+{
+    "squad": {
+        "members": [
+            {
+                "assistant": {
+                    "name": "Appointment Booking",
+                    "voice": {
+                        "provider": "vapi",
+                        "voiceId": "Elliot",
+                    },
+                },
+            },
+            {
+                "assistantId": "saved-assistant-id",
+                "assistantOverrides": {
+                    "tools:append": [
+                        {
+                            "type": "handoff",
+                            "destinations": [
+                                {
+                                    "type": "assistant",
+                                    "assistantId": "assistant-123",
+                                    "description": "Call this tool when the customer wants to talk about pricing"
+                                }
+                            ],
+                            "function": {
+                                "name": "handoff_to_assistant_123"
+                            }
+                        }
+                    ]
+                }
+            },
+        ]
+    }
+}
+```
+
+
+### Member Overrides
+To override the configuration of _all_ assistants in a squad without modifying the underlying assistants, use the `memberOverrides`. 
+<Info>
+Note: This is `squadOverrides` for the [`assistant-request`](api-reference/webhooks/server-message#response.body.messageResponse.AssistantRequest.squadOverrides) webhook response.
+</Info>
+
+```json
+{
+    "squad": {
+        "members": [
+            {
+                "assistant": {
+                    "name": "Appointment Booking",
+                    "voice": {
+                        "provider": "vapi",
+                        "voiceId": "Elliot",
+                    },
+                },
+            },
+            {
+                "assistantId": "saved-assistant-id",
+            },
+        ],
+        "memberOverrides": {
+            "voice": {
+                "provider": "vapi",
+                "voiceId": "Elliot",
+            },
+        }
+    }
+}
+```
+
+## Best Practices
+
+**Keep assistants focused** - Each assistant should have a single, well-defined responsibility with 1-3 goals maximum. Assign only the tools needed for that specific task.
+
+**Minimize squad size** - Try to reduce the number of squad members. Only split into separate assistants when there's a clear functional boundary (lead qualification → sales → booking).
+
+**Define clear handoff conditions** - Write specific handoff descriptions that state exact trigger conditions and what information to collect before transferring. Make sure to specify this in the assistant's prompt and/or tool description. 
+
+**Engineer context carefully** - Use [context engineering](/tools/handoff#context-engineering) to control what conversation history is passed between assistants. As the context grows throughout the call, you may want to limit message history to reduce tokens, improve performance, and prevent context poisoning. Utilize [variable extraction](/tools/handoff#variable-extraction) to save information and generate summaries during a handoff to pass to other assistants.
+
+
+
