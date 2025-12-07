@@ -1,0 +1,11 @@
+https://microsoft.github.io/poml/stable/tutorial/quickstart/
+https://youtu.be/b9WDcFsKixo
+https://microsoft.github.io/poml/stable/language/basic/
+https://microsoft.github.io/poml/stable/language/components/
+https://microsoft.github.io/poml/stable/python/
+https://microsoft.github.io/poml/stable/python/reference/core/
+https://microsoft.github.io/poml/stable/python/reference/integration/
+https://microsoft.github.io/poml/stable/python/trace/
+https://microsoft.github.io/poml/stable/python/integration/openai/
+https://microsoft.github.io/poml/stable/python/integration/langchain/
+https://microsoft.github.io/poml/stable/python/integration/mcp/
