@@ -1,0 +1,95 @@
+Title: Slidev
+
+URL Source: http://sli.dev/features/draggable
+
+Markdown Content:
+Draggable Elements [​](http://sli.dev/features/draggable#draggable-elements)
+----------------------------------------------------------------------------
+
+Draggable elements give you the ability to move, resize, and rotate elements by dragging them with the mouse. This is useful for creating floating elements in your slides.
+
+Directive Usage [​](http://sli.dev/features/draggable#directive-usage)
+----------------------------------------------------------------------
+
+### Data from the frontmatter [​](http://sli.dev/features/draggable#data-from-the-frontmatter)
+
+md
+
+```
+---
+dragPos:
+  square: Left,Top,Width,Height,Rotate
+---
+
+<img v-drag="'square'" src="https://sli.dev/logo.png">
+```
+
+### Data from the directive value [​](http://sli.dev/features/draggable#data-from-the-directive-value)
+
+WARNING
+
+Slidev use regex to update the position value in the slide content. If you meet problems, please use the frontmatter to define the values instead.
+
+md
+
+`<img v-drag="[Left,Top,Width,Height,Rotate]" src="https://sli.dev/logo.png">`
+
+Component Usage [​](http://sli.dev/features/draggable#component-usage)
+----------------------------------------------------------------------
+
+### Data from the frontmatter [​](http://sli.dev/features/draggable#data-from-the-frontmatter-1)
+
+md
+
+```
+---
+dragPos:
+  foo: Left,Top,Width,Height,Rotate
+---
+
+<v-drag pos="foo" text-3xl>
+  <div class="i-carbon:arrow-up" />
+  Use the `v-drag` component to have a draggable container!
+</v-drag>
+```
+
+### Data from props [​](http://sli.dev/features/draggable#data-from-props)
+
+md
+
+```
+<v-drag pos="Left,Top,Width,Height,Rotate" text-3xl>
+  <div class="i-carbon:arrow-up" />
+  Use the `v-drag` component to have a draggable container!
+</v-drag>
+```
+
+Create a Draggable Element [​](http://sli.dev/features/draggable#create-a-draggable-element)
+--------------------------------------------------------------------------------------------
+
+When you create a new draggable element, you don't need to specify the position value (but you need to specify the position name if you want to use the frontmatter). Slidev will automatically generate the initial position value for you.
+
+Automatic Height [​](http://sli.dev/features/draggable#automatic-height)
+------------------------------------------------------------------------
+
+You can set `Height` to `NaN` (in) or `_` (if you use the component) to make the height of the draggable element automatically adjust to its content.
+
+Controls [​](http://sli.dev/features/draggable#controls)
+--------------------------------------------------------
+
+*   Double-click the draggable element to start dragging it.
+*   You can also use the arrow keys to move the element.
+*   Hold `Shift` while dragging to preserve its aspect ratio.
+*   Click outside the draggable element to stop dragging it.
+
+Draggable Arrow [​](http://sli.dev/features/draggable#draggable-arrow)
+----------------------------------------------------------------------
+
+The `<v-drag-arrow>` component creates a draggable arrow element. Simply use it like this:
+
+md
+
+`<v-drag-arrow />`
+
+And you will get a draggable arrow element. Other props are the same as [the `Arrow` component](https://sli.dev/builtin/components#arrow).
+
