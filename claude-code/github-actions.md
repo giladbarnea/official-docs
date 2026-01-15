@@ -671,7 +671,6 @@ You can configure Claude's behavior in two ways:
 
 Claude will follow these guidelines when creating PRs and responding to requests.
 
-
 ---
 
 > To find navigation and other pages in this documentation, fetch the llms.txt file at: https://code.claude.com/docs/llms.txt

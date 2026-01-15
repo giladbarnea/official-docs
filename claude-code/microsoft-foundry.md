@@ -106,7 +106,6 @@ If you receive an error "Failed to get token from azureADTokenProvider: ChainedT
 * [Microsoft Foundry models](https://ai.azure.com/explore/models)
 * [Microsoft Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/)
 
-
 ---
 
 > To find navigation and other pages in this documentation, fetch the llms.txt file at: https://code.claude.com/docs/llms.txt

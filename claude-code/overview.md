@@ -6,7 +6,7 @@
 
 Prerequisites:
 
-* A [Claude.ai](https://claude.ai) (recommended) or [Claude Console](https://console.anthropic.com/) account
+* A [Claude subscription](https://claude.com/pricing) (Pro, Max, Teams, or Enterprise) or [Claude Console](https://console.anthropic.com/) account
 
 **Install Claude Code:**
 
@@ -39,11 +39,9 @@ To install Claude Code, use one of the following methods:
     ```
   </Tab>
 
-  <Tab title="NPM">
-    If you have [Node.js 18 or newer installed](https://nodejs.org/en/download/):
-
-    ```sh  theme={null}
-    npm install -g @anthropic-ai/claude-code
+  <Tab title="WinGet">
+    ```powershell  theme={null}
+    winget install Anthropic.ClaudeCode
     ```
   </Tab>
 </Tabs>
@@ -130,7 +128,6 @@ You'll be prompted to log in on first use. That's it! [Continue with Quickstart 
     Understand how Claude Code handles your data
   </Card>
 </CardGroup>
-
 
 ---
 

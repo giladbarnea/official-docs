@@ -76,7 +76,6 @@ Mirror your devcontainer configuration in CI/CD pipelines to ensure development 
 * [Claude Code security best practices](/en/security)
 * [Enterprise network configuration](/en/network-config)
 
-
 ---
 
 > To find navigation and other pages in this documentation, fetch the llms.txt file at: https://code.claude.com/docs/llms.txt

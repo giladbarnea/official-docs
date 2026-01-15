@@ -154,11 +154,11 @@ let input = '';
 process.stdin.on('data', chunk => input += chunk);
 process.stdin.on('end', () => {
     const data = JSON.parse(input);
-    
+
     // Extract values
     const model = data.model.display_name;
     const currentDir = path.basename(data.workspace.current_dir);
-    
+
     // Check for git branch
     let gitBranch = '';
     try {
@@ -169,7 +169,7 @@ process.stdin.on('end', () => {
     } catch (e) {
         // Not a git repo or can't read HEAD
     }
-    
+
     console.log(`[${model}] 📁 ${currentDir}${gitBranch}`);
 });
 ```
@@ -245,7 +245,6 @@ fi
 
 * If your status line doesn't appear, check that your script is executable (`chmod +x`)
 * Ensure your script outputs to stdout (not stderr)
-
 
 ---
 

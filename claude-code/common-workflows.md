@@ -13,25 +13,25 @@ Suppose you've just joined a new project and need to understand its structure qu
 <Steps>
   <Step title="Navigate to the project root directory">
     ```bash  theme={null}
-    cd /path/to/project 
+    cd /path/to/project
     ```
   </Step>
 
   <Step title="Start Claude Code">
     ```bash  theme={null}
-    claude 
+    claude
     ```
   </Step>
 
   <Step title="Ask for a high-level overview">
     ```
-    > give me an overview of this codebase 
+    > give me an overview of this codebase
     ```
   </Step>
 
   <Step title="Dive deeper into specific components">
     ```
-    > explain the main architecture patterns used here 
+    > explain the main architecture patterns used here
     ```
 
     ```
@@ -59,19 +59,19 @@ Suppose you need to locate code related to a specific feature or functionality.
 <Steps>
   <Step title="Ask Claude to find relevant files">
     ```
-    > find the files that handle user authentication 
+    > find the files that handle user authentication
     ```
   </Step>
 
   <Step title="Get context on how components interact">
     ```
-    > how do these authentication files work together? 
+    > how do these authentication files work together?
     ```
   </Step>
 
   <Step title="Understand the execution flow">
     ```
-    > trace the login process from front-end to database 
+    > trace the login process from front-end to database
     ```
   </Step>
 </Steps>
@@ -92,19 +92,19 @@ Suppose you've encountered an error message and need to find and fix its source.
 <Steps>
   <Step title="Share the error with Claude">
     ```
-    > I'm seeing an error when I run npm test 
+    > I'm seeing an error when I run npm test
     ```
   </Step>
 
   <Step title="Ask for fix recommendations">
     ```
-    > suggest a few ways to fix the @ts-ignore in user.ts 
+    > suggest a few ways to fix the @ts-ignore in user.ts
     ```
   </Step>
 
   <Step title="Apply the fix">
     ```
-    > update user.ts to add the null check you suggested 
+    > update user.ts to add the null check you suggested
     ```
   </Step>
 </Steps>
@@ -126,25 +126,25 @@ Suppose you need to update old code to use modern patterns and practices.
 <Steps>
   <Step title="Identify legacy code for refactoring">
     ```
-    > find deprecated API usage in our codebase 
+    > find deprecated API usage in our codebase
     ```
   </Step>
 
   <Step title="Get refactoring recommendations">
     ```
-    > suggest how to refactor utils.js to use modern JavaScript features 
+    > suggest how to refactor utils.js to use modern JavaScript features
     ```
   </Step>
 
   <Step title="Apply the changes safely">
     ```
-    > refactor utils.js to use ES2024 features while maintaining the same behavior 
+    > refactor utils.js to use ES2024 features while maintaining the same behavior
     ```
   </Step>
 
   <Step title="Verify the refactoring">
     ```
-    > run tests for the refactored code 
+    > run tests for the refactored code
     ```
   </Step>
 </Steps>
@@ -221,7 +221,7 @@ Suppose you want to use specialized AI subagents to handle specific tasks more e
 
 ## Use Plan Mode for safe code analysis
 
-Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely.
+Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses [`AskUserQuestion`](/en/settings#tools-available-to-claude) to gather requirements and clarify your goals before proposing a plan.
 
 ### When to use Plan Mode
 
@@ -283,6 +283,34 @@ Claude analyzes the current implementation and create a comprehensive plan. Refi
 
 See [settings documentation](/en/settings#available-settings) for more configuration options.
 
+## Let Claude interview you
+
+For large features, start with a minimal spec and let Claude interview you to fill in the details:
+
+```
+> Interview me about this feature before you start: user notification system
+```
+
+```
+> Help me think through the requirements for authentication by asking questions
+```
+
+```
+> Ask me clarifying questions to build out this spec: payment processing
+```
+
+Claude uses the [`AskUserQuestion`](/en/settings#tools-available-to-claude) tool to ask you multiple-choice questions for gathering requirements, clarifying ambiguity, and understanding your preferences before writing any code. This collaborative approach produces better specs than trying to anticipate every requirement upfront.
+
+This behavior is most active in Plan Mode. To encourage it in other modes, add guidance to your `CLAUDE.md` file:
+
+```markdown  theme={null}
+Always ask clarifying questions when there are multiple valid approaches to a task.
+```
+
+<Note>
+  If you're building applications with the Agent SDK and want to surface clarifying questions to your users programmatically, see [Handle approvals and user input](https://platform.claude.com/docs/en/agent-sdk/user-input#handle-clarifying-questions).
+</Note>
+
 ***
 
 ## Work with tests
@@ -292,25 +320,25 @@ Suppose you need to add tests for uncovered code.
 <Steps>
   <Step title="Identify untested code">
     ```
-    > find functions in NotificationsService.swift that are not covered by tests 
+    > find functions in NotificationsService.swift that are not covered by tests
     ```
   </Step>
 
   <Step title="Generate test scaffolding">
     ```
-    > add tests for the notification service 
+    > add tests for the notification service
     ```
   </Step>
 
   <Step title="Add meaningful test cases">
     ```
-    > add test cases for edge conditions in the notification service 
+    > add test cases for edge conditions in the notification service
     ```
   </Step>
 
   <Step title="Run and verify tests">
     ```
-    > run the new tests and fix any failures 
+    > run the new tests and fix any failures
     ```
   </Step>
 </Steps>
@@ -328,25 +356,25 @@ Suppose you need to create a well-documented pull request for your changes.
 <Steps>
   <Step title="Summarize your changes">
     ```
-    > summarize the changes I've made to the authentication module 
+    > summarize the changes I've made to the authentication module
     ```
   </Step>
 
   <Step title="Generate a pull request with Claude">
     ```
-    > create a pr 
+    > create a pr
     ```
   </Step>
 
   <Step title="Review and refine">
     ```
-    > enhance the PR description with more context about the security improvements 
+    > enhance the PR description with more context about the security improvements
     ```
   </Step>
 
   <Step title="Add testing details">
     ```
-    > add information about how these changes were tested 
+    > add information about how these changes were tested
     ```
   </Step>
 </Steps>
@@ -366,25 +394,25 @@ Suppose you need to add or update documentation for your code.
 <Steps>
   <Step title="Identify undocumented code">
     ```
-    > find functions without proper JSDoc comments in the auth module 
+    > find functions without proper JSDoc comments in the auth module
     ```
   </Step>
 
   <Step title="Generate documentation">
     ```
-    > add JSDoc comments to the undocumented functions in auth.js 
+    > add JSDoc comments to the undocumented functions in auth.js
     ```
   </Step>
 
   <Step title="Review and enhance">
     ```
-    > improve the generated documentation with more context and examples 
+    > improve the generated documentation with more context and examples
     ```
   </Step>
 
   <Step title="Verify documentation">
     ```
-    > check if the documentation follows our project standards 
+    > check if the documentation follows our project standards
     ```
   </Step>
 </Steps>
@@ -454,6 +482,7 @@ Suppose you need to work with images in your codebase, and you want Claude's hel
   * Include screenshots of errors, UI designs, or diagrams for better context
   * You can work with multiple images in a conversation
   * Image analysis works with diagrams, screenshots, mockups, and more
+  * When Claude references images (for example, `[Image #1]`), `Cmd+Click` (Mac) or `Ctrl+Click` (Windows/Linux) the link to open the image in your default viewer
 </Tip>
 
 ***
@@ -509,10 +538,11 @@ Extended thinking is particularly valuable for complex architectural decisions, 
   Sonnet 4.5 and Opus 4.5 have thinking enabled by default. All other models have thinking disabled by default. Use `/model` to view or switch your current model.
 </Note>
 
-You can configure thinking mode for Claude Code in two ways:
+You can configure thinking mode for Claude Code in several ways:
 
 | Scope                             | How to enable                                                                        | Details                                                                                                                                          |
 | --------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Toggle shortcut**               | Press `Option+T` (macOS) or `Alt+T` (Windows/Linux)                                  | Toggle thinking on/off. May require [terminal configuration](/en/terminal-config) to enable Option key shortcuts                                 |
 | **Global default**                | Use `/config` to toggle thinking mode on                                             | Sets your default across all projects.<br />Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json`                                        |
 | **Environment variable override** | Set [`MAX_THINKING_TOKENS`](/en/settings#environment-variables) environment variable | When set, applies a custom token budget to all requests, overriding your thinking mode configuration. Example: `export MAX_THINKING_TOKENS=1024` |
 
@@ -635,7 +665,7 @@ Forked sessions (created with `/rewind` or `--fork-session`) are grouped togethe
   Tips:
 
   * **Name sessions early**: Use `/rename` when starting work on a distinct task—it's much easier to find "payment-integration" than "explain this function" later
-  * Use `--continue` for quick access to your most recent conversation
+  * Use `--continue` for quick access to your most recent conversation in the current directory
   * Use `--resume session-name` when you know which session you need
   * Use `--resume` (without a name) when you need to browse and select
   * For scripts, use `claude --continue --print "prompt"` to resume in non-interactive mode
@@ -667,7 +697,7 @@ Suppose you need to work on multiple tasks simultaneously with complete code iso
 
   <Step title="Create a new worktree">
     ```bash  theme={null}
-    # Create a new worktree with a new branch 
+    # Create a new worktree with a new branch
     git worktree add ../project-feature-a -b feature-a
 
     # Or create a worktree with an existing branch
@@ -679,7 +709,7 @@ Suppose you need to work on multiple tasks simultaneously with complete code iso
 
   <Step title="Run Claude Code in each worktree">
     ```bash  theme={null}
-    # Navigate to your worktree 
+    # Navigate to your worktree
     cd ../project-feature-a
 
     # Run Claude Code in this isolated environment
@@ -825,13 +855,13 @@ Suppose you want to create reusable slash commands for your project that all tea
 
   <Step title="Create a Markdown file for each command">
     ```bash  theme={null}
-    echo "Analyze the performance of this code and suggest three specific optimizations:" > .claude/commands/optimize.md 
+    echo "Analyze the performance of this code and suggest three specific optimizations:" > .claude/commands/optimize.md
     ```
   </Step>
 
   <Step title="Use your custom command in Claude Code">
     ```
-    > /optimize 
+    > /optimize
     ```
   </Step>
 </Steps>
@@ -856,7 +886,7 @@ Suppose you want to create flexible slash commands that can accept additional in
     Understand the issue described in the ticket 2. Locate the relevant code in
     our codebase 3. Implement a solution that addresses the root cause 4. Add
     appropriate tests 5. Prepare a concise PR description' >
-    .claude/commands/fix-issue.md 
+    .claude/commands/fix-issue.md
     ```
   </Step>
 
@@ -864,7 +894,7 @@ Suppose you want to create flexible slash commands that can accept additional in
     In your Claude session, use the command with arguments.
 
     ```
-    > /fix-issue 123 
+    > /fix-issue 123
     ```
 
     This replaces \$ARGUMENTS with "123" in the prompt.
@@ -886,20 +916,20 @@ Suppose you want to create personal slash commands that work across all your pro
 <Steps>
   <Step title="Create a commands directory in your home folder">
     ```bash  theme={null}
-    mkdir -p ~/.claude/commands 
+    mkdir -p ~/.claude/commands
     ```
   </Step>
 
   <Step title="Create a Markdown file for each command">
     ```bash  theme={null}
     echo "Review this code for security vulnerabilities, focusing on:" >
-    ~/.claude/commands/security-review.md 
+    ~/.claude/commands/security-review.md
     ```
   </Step>
 
   <Step title="Use your personal custom command">
     ```
-    > /security-review 
+    > /security-review
     ```
   </Step>
 </Steps>
@@ -964,7 +994,6 @@ Claude has built-in access to its documentation and can answer questions about i
 <Card title="Claude Code reference implementation" icon="code" href="https://github.com/anthropics/claude-code/tree/main/.devcontainer">
   Clone our development container reference implementation.
 </Card>
-
 
 ---
 

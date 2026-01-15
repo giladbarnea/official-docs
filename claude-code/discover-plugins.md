@@ -32,6 +32,10 @@ To install a plugin from the official marketplace:
 /plugin install plugin-name@claude-plugins-official
 ```
 
+<Note>
+  The official marketplace is maintained by Anthropic. To distribute your own plugins, [create your own marketplace](/en/plugin-marketplaces) and share it with users.
+</Note>
+
 The official marketplace includes several categories of plugins:
 
 ### Code intelligence
@@ -206,11 +210,17 @@ You can also add a direct path to a `marketplace.json` file:
 /plugin marketplace add ./path/to/marketplace.json
 ```
 
-Or add a remote `marketplace.json` file via URL:
+### Add from remote URLs
+
+Add a remote `marketplace.json` file via URL:
 
 ```shell  theme={null}
 /plugin marketplace add https://example.com/marketplace.json
 ```
+
+<Note>
+  URL-based marketplaces have some limitations compared to Git-based marketplaces. If you encounter "path not found" errors when installing plugins, see [Troubleshooting](/en/plugin-marketplaces#plugins-with-relative-paths-fail-in-url-based-marketplaces).
+</Note>
 
 ## Install plugins
 
@@ -226,7 +236,7 @@ To choose a different [installation scope](/en/settings#configuration-scopes), u
 * **Project scope**: install for all collaborators on this repository (adds to `.claude/settings.json`)
 * **Local scope**: install for yourself in this repository only (not shared with collaborators)
 
-You may also see plugins with **managed** scope—these are installed by enterprise administrators via [managed settings](/en/settings#enterprise-managed-policy-settings) and cannot be modified.
+You may also see plugins with **managed** scope—these are installed by administrators via [managed settings](/en/settings#settings-files) and cannot be modified.
 
 Run `/plugin` and go to the **Installed** tab to see your plugins grouped by scope.
 
@@ -319,6 +329,15 @@ Official Anthropic marketplaces have auto-update enabled by default. Third-party
 
 To disable all automatic updates entirely for both Claude Code and all plugins, set the `DISABLE_AUTOUPDATER` environment variable. See [Auto updates](/en/setup#auto-updates) for details.
 
+To keep plugin auto-updates enabled while disabling Claude Code auto-updates, set `FORCE_AUTOUPDATE_PLUGINS=true` along with `DISABLE_AUTOUPDATER`:
+
+```shell  theme={null}
+export DISABLE_AUTOUPDATER=true
+export FORCE_AUTOUPDATE_PLUGINS=true
+```
+
+This is useful when you want to manage Claude Code updates manually but still receive automatic plugin updates.
+
 ## Configure team marketplaces
 
 Team admins can set up automatic marketplace installation for projects by adding marketplace configuration to `.claude/settings.json`. When team members trust the repository folder, Claude Code prompts them to install these marketplaces and plugins.
@@ -343,6 +362,7 @@ If you see "unknown command" or the `/plugin` command doesn't appear:
 * **Marketplace not loading**: Verify the URL is accessible and that `.claude-plugin/marketplace.json` exists at the path
 * **Plugin installation failures**: Check that plugin source URLs are accessible and repositories are public (or you have access)
 * **Files not found after installation**: Plugins are copied to a cache, so paths referencing files outside the plugin directory won't work
+* **Plugin Skills not appearing**: Clear the cache with `rm -rf ~/.claude/plugins/cache`, restart Claude Code, and reinstall the plugin. See [Plugin Skills not appearing](/en/skills#plugin-skills-not-appearing-after-installation) for details.
 
 For detailed troubleshooting with solutions, see [Troubleshooting](/en/plugin-marketplaces#troubleshooting) in the marketplace guide. For debugging tools, see [Debugging and development tools](/en/plugins-reference#debugging-and-development-tools).
 
@@ -351,7 +371,6 @@ For detailed troubleshooting with solutions, see [Troubleshooting](/en/plugin-ma
 * **Build your own plugins**: See [Plugins](/en/plugins) to create custom commands, agents, and hooks
 * **Create a marketplace**: See [Create a plugin marketplace](/en/plugin-marketplaces) to distribute plugins to your team or community
 * **Technical reference**: See [Plugins reference](/en/plugins-reference) for complete specifications
-
 
 ---
 

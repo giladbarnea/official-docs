@@ -147,7 +147,6 @@ When running in JetBrains IDEs, consider:
 
 For additional help, see our [troubleshooting guide](/en/troubleshooting).
 
-
 ---
 
 > To find navigation and other pages in this documentation, fetch the llms.txt file at: https://code.claude.com/docs/llms.txt

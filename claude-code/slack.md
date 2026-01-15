@@ -205,7 +205,6 @@ Slack workspace administrators control whether the Claude app can be installed i
   </Card>
 </CardGroup>
 
-
 ---
 
 > To find navigation and other pages in this documentation, fetch the llms.txt file at: https://code.claude.com/docs/llms.txt
